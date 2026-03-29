@@ -8,6 +8,7 @@ import type { AnimatedProps } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const AnimatedView = Animated.createAnimatedComponent(View);
+// Let short screens still stretch to fill the viewport when scrolling is enabled.
 const scrollViewContentContainerStyle = { flexGrow: 1 } as const;
 
 type Props = AnimatedProps<ViewProps> & {
@@ -16,6 +17,12 @@ type Props = AnimatedProps<ViewProps> & {
   scrollViewProps?: Omit<ScrollViewProps, "contentContainerStyle">;
 };
 
+/**
+ * Wraps screen content in a safe-area aware container with optional scrolling.
+ *
+ * @param props Container styling, scroll behavior, and children.
+ * @returns Animated screen wrapper for full-screen layouts.
+ */
 export function Container({
   children,
   className,

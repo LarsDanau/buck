@@ -177,43 +177,26 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     plugins: [
       "expo-router",
+      "expo-localization",
       [
         "expo-font",
         {
           fonts: [
-            "./src/assets/fonts/Geist-Black.ttf",
-            "./src/assets/fonts/Geist-ExtraBold.ttf",
-            "./src/assets/fonts/Geist-Bold.ttf",
             "./src/assets/fonts/Geist-SemiBold.ttf",
             "./src/assets/fonts/Geist-Medium.ttf",
             "./src/assets/fonts/Geist-Regular.ttf",
-            "./src/assets/fonts/Geist-Light.ttf",
-            "./src/assets/fonts/Geist-ExtraLight.ttf",
-            "./src/assets/fonts/Geist-Thin.ttf",
           ],
           android: {
             fonts: [
               {
                 fontFamily: "Geist",
                 fontDefinitions: [
-                  { path: "./src/assets/fonts/Geist-Black.ttf", weight: 900 },
-                  {
-                    path: "./src/assets/fonts/Geist-ExtraBold.ttf",
-                    weight: 800,
-                  },
-                  { path: "./src/assets/fonts/Geist-Bold.ttf", weight: 700 },
                   {
                     path: "./src/assets/fonts/Geist-SemiBold.ttf",
                     weight: 600,
                   },
                   { path: "./src/assets/fonts/Geist-Medium.ttf", weight: 500 },
                   { path: "./src/assets/fonts/Geist-Regular.ttf", weight: 400 },
-                  { path: "./src/assets/fonts/Geist-Light.ttf", weight: 300 },
-                  {
-                    path: "./src/assets/fonts/Geist-ExtraLight.ttf",
-                    weight: 200,
-                  },
-                  { path: "./src/assets/fonts/Geist-Thin.ttf", weight: 100 },
                 ],
               },
             ],

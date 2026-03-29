@@ -1,4 +1,6 @@
 import "@/global.css";
+import "@/src/lib/i18n/i18n";
+
 import { Stack } from "expo-router";
 import { HeroUINativeProvider } from "heroui-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -7,17 +9,17 @@ import { KeyboardProvider } from "react-native-keyboard-controller";
 import { AppThemeProvider } from "@/src/contexts/app-theme-context";
 
 export const unstable_settings = {
-  initialRouteName: "(drawer)",
+  initialRouteName: "(tabs)",
 };
 
 const rootViewStyle = { flex: 1 } as const;
-const drawerScreenOptions = { headerShown: false } as const;
+const tabScreenOptions = { headerShown: false } as const;
 const modalScreenOptions = { title: "Modal", presentation: "modal" } as const;
 
 function StackLayout() {
   return (
     <Stack>
-      <Stack.Screen name="(drawer)" options={drawerScreenOptions} />
+      <Stack.Screen name="(tabs)" options={tabScreenOptions} />
       <Stack.Screen name="modal" options={modalScreenOptions} />
     </Stack>
   );
