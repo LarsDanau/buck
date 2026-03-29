@@ -1,12 +1,27 @@
 # Lefthook configuration
 # https://github.com/evilmartians/lefthook
 
+glob_matcher: doublestar
+
 pre-commit:
-  parallel: true
+  files: git diff --cached --name-only --diff-filter=ACMR
   jobs:
-    - name: oxlint
-      run: bun oxlint --fix {staged_files}
+    - name: lint-staged
+      glob: "*.{js,cjs,mjs,ts,cts,mts,jsx,tsx}"
+      run: bun oxlint --fix {files}
       stage_fixed: true
-    - name: oxfmt
-      run: bun oxfmt --write {staged_files}
+
+    - name: format-staged
+      glob: "*.{js,cjs,mjs,ts,cts,mts,jsx,tsx,json,jsonc,md,mdx,css,yml,yaml}"
+      run: bun oxfmt --no-error-on-unmatched-pattern --write {files}
       stage_fixed: true
+
+pre-push:
+  jobs:
+    - name: turbo-check
+      run: bunx turbo run lint format check-types
+
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: bunx commitlint --edit {1}

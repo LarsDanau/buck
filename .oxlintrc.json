@@ -1,39 +1,133 @@
 {
-  "plugins": null,
-  "categories": {},
-  "rules": {},
-  "settings": {
-    "jsx-a11y": {
-      "polymorphicPropName": null,
-      "components": {},
-      "attributes": {}
-    },
-    "next": {
-      "rootDir": []
-    },
-    "react": {
-      "formComponents": [],
-      "linkComponents": [],
-      "version": null,
-      "componentWrapperFunctions": []
-    },
-    "jsdoc": {
-      "ignorePrivate": false,
-      "ignoreInternal": false,
-      "ignoreReplacesDocs": true,
-      "overrideReplacesDocs": true,
-      "augmentsExtendsReplacesDocs": false,
-      "implementsReplacesDocs": false,
-      "exemptDestructuredRootsFromChecks": false,
-      "tagNamePreference": {}
-    },
-    "vitest": {
-      "typecheck": false
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "jsdoc",
+    "import",
+    "oxc",
+    "typescript",
+    "react",
+    "react-perf",
+    "promise",
+    "unicorn",
+    "jsx-a11y"
+  ],
+  "rules": {
+    // Typescript
+    "typescript/no-explicit-any": "error", // Avoid 'any' types
+    "typescript/consistent-type-imports": "error", // enforce `import type`
+    "typescript/consistent-type-definitions": ["warn", "interface"], // Enforce 'interface' over 'type' for object type definitions
+    "typescript/no-non-null-assertion": "warn", // Disallow non-null assertions using the ! postfix operator.
+    "typescript/ban-ts-comment": "warn", // Avoid @ts-ignore abuse
+    "typescript/no-empty-interface": "warn", // Disallow the declaration of empty interfaces.
+    "typescript/consistent-type-assertions": "warn", // Avoid unsafe `as` casts
+    "typescript/array-type": ["warn", { "default": "array-simple" }], // Require consistently using either T[] or Array<T> for arrays.
+    "typescript/consistent-generic-constructors": "warn",
+    "typescript/no-require-imports": "error", // Forbids the use of CommonJS require calls.
+    "typescript/return-await": "error", // This rule enforces consistent returning of awaited values from async functions.
+
+    // React
+    "react/jsx-key": "error", // Enforce key prop for elements in array
+    "react/jsx-no-duplicate-props": "error", // This rule prevents duplicate props in JSX elements.
+    "react/no-array-index-key": "error", // Warn if an element uses an Array index in its key.
+    "react/exhaustive-deps": "warn", // Verifies the list of dependencies for Hooks like useEffect and similar.
+    "react/jsx-no-constructed-context-values": "warn", // Disallows JSX context provider values from taking values that will cause needless rerenders.
+    "react/jsx-boolean-value": ["warn", "never"], // Enforce a consistent boolean attribute style in your code. <X enabled /> not <X enabled={true} />
+    "react/jsx-curly-brace-presence": ["warn", "never"], // no {"string"} in JSX
+    "react/jsx-fragments": ["warn", "syntax"], // Enforces the shorthand or standard form for React Fragments.
+    "react/jsx-no-useless-fragment": "error", // Disallow unnecessary fragments
+    "react/self-closing-comp": "error", // Detects components without children which can be self-closed to avoid unnecessary extra closing tags. <View /> not <View></View>
+    "react/forward-ref-uses-ref": "warn", // Requires that components wrapped with forwardRef must have a ref parameter.
+
+    // React perf
+    "react-perf/jsx-no-new-array-as-prop": "warn", // Prevent Arrays that are local to the current method from being used as values of JSX props.
+    "react-perf/jsx-no-new-function-as-prop": "warn", // Prevent Functions that are local to the current method from being used as values of JSX props.
+    "react-perf/jsx-no-new-object-as-prop": "warn", // Prevent Objects that are local to the current method from being used as values of JSX props.
+    "react-perf/jsx-no-jsx-as-prop": "warn", // Prevent JSX elements that are local to the current method from being used as values of JSX props.
+
+    // ESLint core
+    "no-unused-vars": "error", // Disallows variable declarations, imports, or type declarations that are not used in code.
+    "no-console": "error", // Disallow the use of console.
+    "no-debugger": "error", // Checks for usage of the debugger statement
+    "eqeqeq": "error", // Requires the use of the === and !== operators, disallowing the use of == and !=.
+    "no-var": "error", // Only const/let
+    "prefer-const": "error", // Requires const declarations for variables that are never reassigned after their initial declaration.
+    "no-nested-ternary": "warn", // Disallows nested ternary expressions to improve code readability and maintainability.
+    "no-param-reassign": "warn", // Disallow reassigning function parameters or, optionally, their properties.
+    "default-case": "warn", // Enforces that all switch statements include a default case, unless explicitly marked with a configured comment.
+    "no-throw-literal": "error", // Disallows throwing literals or non-Error objects as exceptions.
+    "array-callback-return": "error", // Enforce return statements in callbacks of array methods
+    "no-shadow": "warn", // Disallows variable declarations from shadowing variables declared in the outer scope.
+
+    // Import
+    "import/no-duplicates": "error", // Reports if a resolved path is imported more than once in the same module.
+    "import/first": "warn", // Forbids any non-import statements before imports except directives.
+    "import/no-self-import": "error", // Forbids a module from importing itself. This can sometimes happen accidentally, especially during refactoring.
+    "import/no-cycle": "warn", // Ensures that there is no resolvable path back to this module via its dependencies.
+    "import/consistent-type-specifier-style": "warn", // This rule either enforces or bans the use of inline type-only markers for named imports.
+    "import/no-namespace": "error", //Enforce a convention of not using namespaced (a.k.a. "wildcard" *) imports.
+
+    // Promise
+    "promise/always-return": "warn", // Require returning inside each then() to create readable and reusable Promise chains.
+    "promise/catch-or-return": "warn", // Ensure that each time a then() is applied to a promise, a catch() must be applied as well. Exceptions are made for promises returned from a function.
+    "promise/no-return-wrap": "error", // Prevents unnecessary wrapping of return values in promises with either Promise.resolve or Promise.reject.
+    "promise/prefer-catch": "error", // Prefer catch to then(a, b) and then(null, b).
+    "promise/no-nesting": "error", // Disallow nested then() or catch() statements.
+
+    // Unicorn (Code quality)
+    "unicorn/no-array-for-each": "warn", // Forbids the use of Array#forEach in favor of a for loop.
+    "unicorn/prefer-includes": "warn", // Prefer includes() over indexOf() when checking for existence or non-existence. All built-ins have .includes() in addition to .indexOf().
+    "unicorn/no-typeof-undefined": "warn", // Disallow typeof comparisons with undefined.
+    "unicorn/prefer-string-slice": "warn", // Prefer String#slice() over String#substr() and String#substring().
+    "unicorn/prefer-ternary": "warn", // Prefers ternary expressions over simple if/else statements.
+    "unicorn/throw-new-error": "error", // This rule makes sure you always use new when throwing an error.
+    "unicorn/error-message": "error", // Enforces providing a message when creating built-in Error objects to improve readability and debugging.
+    "unicorn/no-useless-undefined": "warn", // Do not use useless undefined.
+    "unicorn/consistent-function-scoping": "warn", // Disallow functions that are declared in a scope which does not capture any variables from the outer scope.
+    "unicorn/no-for-loop": "warn", // Disallow for loops in favor of for...of
+    "unicorn/prefer-string-starts-ends-with": "warn", // Prefer startsWith() and endsWith() over equivalent string slicing
+    "unicorn/prefer-number-properties": "warn", // Disallows use of parseInt(), isNaN(), Infinity and similar as globals
+    "unicorn/no-instanceof-array": "warn", // Disallow instanceof Array — use Array.isArray() instead
+    "unicorn/better-regex": "warn", // Improve regexes by making them more precise (e.g. /[0-9]/ → /\d/)
+    "unicorn/no-useless-spread": "warn", // Disallow unnecessary spread operators that don't change the value
+    "unicorn/no-unnecessary-await": "warn", // Disallow awaiting on a non-Promise value
+    "unicorn/prefer-date-now": "warn", // Prefer Date.now() over new Date().getTime() or +new Date()
+    "unicorn/no-zero-fractions": "warn", // Disallow number literals with a zero fractional part (1.0 → 1)
+    "unicorn/prefer-logical-operator-over-ternary": "warn", // Prefer logical operators (&&, ||, ??) over ternary expressions where possible
+    "unicorn/prefer-spread": "warn", // Prefer spread syntax over Array#concat(), Object#assign() and similar
+    "unicorn/no-empty-file": "warn", // Disallows files that do not contain any meaningful code
+    "unicorn/prefer-array-find": "warn", // Prefer Array#find() over Array#filter() followed by index access
+    "unicorn/prefer-at": "warn", // Prefer .at() for index access, especially for negative indices like arr.at(-1)
+    "unicorn/prefer-structured-clone": "warn", // Prefer structuredClone() over JSON.parse(JSON.stringify()) for deep cloning
+    "unicorn/catch-error-name": "warn", // Enforce consistent naming of catch block parameters (error not e or err)
+    "unicorn/no-abusive-eslint-disable": "error", // Disallow eslint-disable comments without specifying a rule name
+
+    // Oxc built-ins
+    "oxc/approx-constant": "warn", // Disallows the use of approximate constants, instead preferring the use of the constants in the Math object.
+    "oxc/const-comparisons": "error", // Checks for redundant or logically impossible comparisons.
+    "oxc/double-comparisons": "error", // This rule checks for double comparisons in logical expressions.
+    "oxc/bad-object-literal-comparison": "error", // Checks for comparisons between object and array literals.
+    "oxc/bad-replace-all-arg": "error" // This rule warns when the replaceAll method is called with a regular expression that does not have the global flag (g).
+  },
+  "globals": {
+    "__DEV__": "readonly", // Expo/RN build flag
+    "require": "readonly" // Metro bundler still uses require internally
+  },
+  "ignorePatterns": [
+    "node_modules",
+    ".expo",
+    "dist",
+    "build",
+    "babel.config.js",
+    "metro.config.js",
+    "**/.agents/**",
+    "**/.claude/**"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.test.ts", "**/*.test.tsx"],
+      "rules": {
+        "no-console": "off" // Console logs are allowed in tests
+      }
     }
-  },
-  "env": {
-    "builtin": true
-  },
-  "globals": {},
-  "ignorePatterns": []
+  ]
 }
