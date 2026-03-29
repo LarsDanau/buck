@@ -1,5 +1,16 @@
-import { HStack, IconSymbol, Text, View, VStack } from "@/components/primitives";
-import { ListGroup, Switch, useThemeColor } from "heroui-native";
+import {
+  HStack,
+  IconSymbol,
+  Text,
+  View,
+  VStack,
+} from "@/components/primitives";
+import {
+  ListGroup,
+  PressableFeedback,
+  Switch,
+  useThemeColor,
+} from "heroui-native";
 import { useMemo, useState } from "react";
 import type { ComponentProps, ReactNode } from "react";
 
@@ -18,11 +29,17 @@ function SettingsItemIcon({
   icon: SettingsIconName;
   backgroundColor: string;
 }) {
-  const iconContainerStyle = useMemo(() => ({ backgroundColor }), [backgroundColor]);
+  const iconContainerStyle = useMemo(
+    () => ({ backgroundColor }),
+    [backgroundColor],
+  );
   const [foreground] = useThemeColor(["foreground"]);
 
   return (
-    <View className="size-8 items-center justify-center rounded-lg" style={iconContainerStyle}>
+    <View
+      className="size-8 items-center justify-center rounded-lg"
+      style={iconContainerStyle}
+    >
       <IconSymbol name={icon} size={18} tintColor={foreground} />
     </View>
   );
@@ -57,15 +74,20 @@ function SettingsRow({
   children?: ReactNode;
 }) {
   return (
-    <ListGroup.Item className="p-0">
-      <ListGroup.ItemPrefix>
-        <SettingsItemIcon backgroundColor={backgroundColor} icon={icon} />
-      </ListGroup.ItemPrefix>
-      <ListGroup.ItemContent>
-        <ListGroup.ItemTitle>{title}</ListGroup.ItemTitle>
-      </ListGroup.ItemContent>
-      <ListGroup.ItemSuffix>{children}</ListGroup.ItemSuffix>
-    </ListGroup.Item>
+    <PressableFeedback animation={false}>
+      <PressableFeedback.Scale>
+        <ListGroup.Item className="px-4 py-2" disabled>
+          <ListGroup.ItemPrefix>
+            <SettingsItemIcon backgroundColor={backgroundColor} icon={icon} />
+          </ListGroup.ItemPrefix>
+          <ListGroup.ItemContent>
+            <ListGroup.ItemTitle>{title}</ListGroup.ItemTitle>
+          </ListGroup.ItemContent>
+          <ListGroup.ItemSuffix>{children}</ListGroup.ItemSuffix>
+        </ListGroup.Item>
+      </PressableFeedback.Scale>
+      <PressableFeedback.Ripple />
+    </PressableFeedback>
   );
 }
 
@@ -155,13 +177,19 @@ function SettingsToggleRow({
  * @param props Section title and row children.
  * @returns Labeled settings section wrapping grouped rows.
  */
-function SettingsSection({ title, children }: { title: string; children: ReactNode }) {
+function SettingsSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) {
   return (
     <VStack gap="2">
       <Text size="sm" tone="muted">
         {title}
       </Text>
-      <ListGroup className="rounded-xl py-2 px-4 gap-2">{children}</ListGroup>
+      <ListGroup className="rounded-xl">{children}</ListGroup>
     </VStack>
   );
 }
@@ -180,7 +208,12 @@ function FeaturesSection() {
         title="Appearance"
         value="Dark"
       />
-      <SettingsValueRow backgroundColor="#E68CFF" icon="app.grid" title="App Icon" value="Light" />
+      <SettingsValueRow
+        backgroundColor="#E68CFF"
+        icon="app.grid"
+        title="App Icon"
+        value="Light"
+      />
       <SettingsToggleRow
         backgroundColor="#34C759"
         defaultSelected
@@ -195,9 +228,18 @@ function FeaturesSection() {
         value="Moderate"
       />
 
-      <SettingsValueRow backgroundColor="#7CD094" icon="eurosign" title="Currency" value="EUR" />
+      <SettingsValueRow
+        backgroundColor="#7CD094"
+        icon="eurosign"
+        title="Currency"
+        value="EUR"
+      />
 
-      <SettingsLinkRow backgroundColor="#787CFF" icon="flag.fill" title="Experimental" />
+      <SettingsLinkRow
+        backgroundColor="#787CFF"
+        icon="flag.fill"
+        title="Experimental"
+      />
     </SettingsSection>
   );
 }
@@ -238,16 +280,32 @@ function DataSection() {
 function OtherSection() {
   return (
     <SettingsSection title="Other">
-      <SettingsLinkRow backgroundColor="#F7C43A" icon="star.square.fill" title="Rate Buck" />
+      <SettingsLinkRow
+        backgroundColor="#F7C43A"
+        icon="star.square.fill"
+        title="Rate Buck"
+      />
 
       <SettingsLinkRow
         backgroundColor="#537BFF"
         icon="square.and.arrow.up.fill"
         title="Feature Request"
       />
-      <SettingsLinkRow backgroundColor="#FF8282" icon="ladybug.fill" title="Report a bug" />
-      <SettingsLinkRow backgroundColor="#FF5353" icon="heart.fill" title="Support the app" />
-      <SettingsLinkRow backgroundColor="#8CD578" icon="sharedwithyou" title="Share with friends" />
+      <SettingsLinkRow
+        backgroundColor="#FF8282"
+        icon="ladybug.fill"
+        title="Report a bug"
+      />
+      <SettingsLinkRow
+        backgroundColor="#FF5353"
+        icon="heart.fill"
+        title="Support the app"
+      />
+      <SettingsLinkRow
+        backgroundColor="#8CD578"
+        icon="sharedwithyou"
+        title="Share with friends"
+      />
     </SettingsSection>
   );
 }
