@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 
 import { SettingsSectionList } from "@/src/features/settings/components/settings-section-list";
 import { LinkButton } from "heroui-native";
+import { PageTitle } from "@/src/components/composites/page-title";
+import { PageSubtitle } from "@/src/components/composites/page-subtitle";
 
 /**
  * Footer with app version and author attribution.
@@ -22,7 +24,9 @@ function SettingsFooter({ appVersion }: { appVersion?: string }) {
           Made by{" "}
         </Text>
         <LinkButton>
-          <LinkButton.Label className="text-accent text-xs">Lars 🇧🇪 ❤</LinkButton.Label>
+          <LinkButton.Label className="text-accent text-xs">
+            Lars 🇧🇪 ❤
+          </LinkButton.Label>
         </LinkButton>
       </View>
     </VStack>
@@ -46,12 +50,8 @@ export function SettingsTabScreen() {
     >
       <VStack gap="8">
         <VStack gap="1">
-          <Text size="xl" weight="semibold">
-            {t(($) => $.overview.title)}
-          </Text>
-          <Text size="sm" tone="muted">
-            App preferences and data tools.
-          </Text>
+          <PageTitle>{t(($) => $.overview.title)}</PageTitle>
+          <PageSubtitle>App preferences and data tools.</PageSubtitle>
         </VStack>
 
         <SettingsSectionList />
