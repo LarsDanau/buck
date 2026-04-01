@@ -64,7 +64,7 @@ jobs:
         run: cd apps/native && bun run config:check
 
       - name: Run Expo doctor
-        run: cd apps/native && bun run doctor
+        run: cd apps/native && bun run doctor:ci
 
       - name: Audit dependencies
         run: bun run audit
