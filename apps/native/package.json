@@ -41,7 +41,7 @@
     "expo-web-browser": "~55.0.10",
     "heroui-native": "^1.0.1",
     "i18next": "^26.0.3",
-    "react": "19.2.0",
+    "react": "19.2.4",
     "react-dom": "19.2.0",
     "react-i18next": "^17.0.2",
     "react-native": "0.83.4",
