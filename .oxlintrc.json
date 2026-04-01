@@ -83,7 +83,6 @@
     "unicorn/error-message": "error", // Enforces providing a message when creating built-in Error objects to improve readability and debugging.
     "unicorn/no-useless-undefined": "warn", // Do not use useless undefined.
     "unicorn/consistent-function-scoping": "warn", // Disallow functions that are declared in a scope which does not capture any variables from the outer scope.
-    "unicorn/no-for-loop": "warn", // Disallow for loops in favor of for...of
     "unicorn/prefer-string-starts-ends-with": "warn", // Prefer startsWith() and endsWith() over equivalent string slicing
     "unicorn/prefer-number-properties": "warn", // Disallows use of parseInt(), isNaN(), Infinity and similar as globals
     "unicorn/no-instanceof-array": "warn", // Disallow instanceof Array — use Array.isArray() instead
