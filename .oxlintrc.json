@@ -87,7 +87,6 @@
     "unicorn/prefer-string-starts-ends-with": "warn", // Prefer startsWith() and endsWith() over equivalent string slicing
     "unicorn/prefer-number-properties": "warn", // Disallows use of parseInt(), isNaN(), Infinity and similar as globals
     "unicorn/no-instanceof-array": "warn", // Disallow instanceof Array — use Array.isArray() instead
-    "unicorn/better-regex": "warn", // Improve regexes by making them more precise (e.g. /[0-9]/ → /\d/)
     "unicorn/no-useless-spread": "warn", // Disallow unnecessary spread operators that don't change the value
     "unicorn/no-unnecessary-await": "warn", // Disallow awaiting on a non-Promise value
     "unicorn/prefer-date-now": "warn", // Prefer Date.now() over new Date().getTime() or +new Date()
