@@ -49,10 +49,7 @@ function parseBuildNumber(buildNumber: unknown): number {
  * @param buildNumber Two-digit local build number.
  * @returns Android versionCode.
  */
-function convertVersionToVersionCode(
-  version: string,
-  buildNumber: number,
-): number {
+function convertVersionToVersionCode(version: string, buildNumber: number): number {
   const parts = version.split(".");
   if (parts.length !== 3) {
     throw new Error('Version must be in semantic format "major.minor.patch".');
@@ -75,12 +72,9 @@ function convertVersionToVersionCode(
     throw new Error("Minor and patch versions must be between 0 and 99.");
   }
 
-  const versionCode =
-    major * 1_000_000 + minor * 10_000 + patch * 100 + buildNumber;
+  const versionCode = major * 1_000_000 + minor * 10_000 + patch * 100 + buildNumber;
   if (versionCode > 2_147_483_647) {
-    throw new Error(
-      "Calculated versionCode exceeds Android's maximum allowed value.",
-    );
+    throw new Error("Calculated versionCode exceeds Android's maximum allowed value.");
   }
 
   return versionCode;
@@ -92,8 +86,7 @@ function convertVersionToVersionCode(
  * @returns Build-time env values used by app.config.ts.
  */
 function getBuildEnv() {
-  const isCiBuild =
-    process.env.CI === "true" || process.env.EAS_BUILD === "true";
+  const isCiBuild = process.env.CI === "true" || process.env.EAS_BUILD === "true";
   const appEnv = process.env.APP_ENV ?? (isCiBuild ? undefined : "development");
 
   return {
@@ -171,10 +164,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     android: {
       package: identifier,
-      versionCode: convertVersionToVersionCode(
-        packageJson.version,
-        buildNumber,
-      ),
+      versionCode: convertVersionToVersionCode(packageJson.version, buildNumber),
       adaptiveIcon: {
         foregroundImage: `./src/assets/icons/app/${appVariant}/android-adaptive.png`,
         backgroundColor: "#000000",
