@@ -8,21 +8,24 @@
     ],
     "catalog": {
       "zod": "^4.3.6",
-      "typescript": "^5.9.2"
+      "typescript": "^5.9.3"
     }
   },
   "type": "module",
   "scripts": {
-    "dev": "turbo dev",
-    "build": "turbo build",
-    "check-types": "turbo check-types",
-    "check": "oxlint && oxfmt",
-    "check:fix": "oxlint --fix && oxfmt --write",
-    "lint": "oxlint",
-    "lint:ci": "oxlint --format=github",
-    "lint:fix": "oxlint --fix",
-    "format": "oxfmt",
-    "format:fix": "oxfmt --write"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "test:ci": "turbo run test:ci",
+    "check-types": "turbo run check-types",
+    "check": "turbo run format lint && bun run audit",
+    "check:fix": "turbo run lint:fix format:fix",
+    "lint": "turbo run lint",
+    "lint:ci": "turbo run lint -- --format=github",
+    "lint:fix": "turbo run lint:fix",
+    "format": "turbo run format",
+    "format:fix": "turbo run format:fix",
+    "audit": "bun audit"
   },
   "dependencies": {
     "@buck/env": "workspace:*",
@@ -35,8 +38,8 @@
     "@commitlint/types": "^20.5.0",
     "lefthook": "^2.1.4",
     "oxfmt": "^0.42.0",
-    "oxlint": "^1.57.0",
-    "turbo": "^2.8.20",
+    "oxlint": "^1.58.0",
+    "turbo": "^2.9.3",
     "typescript": "catalog:"
   },
   "packageManager": "bun@1.3.5"

@@ -3,3 +3,69 @@
 @import "heroui-native/styles";
 
 @source './node_modules/heroui-native/lib';
+
+@theme {
+  --font-normal: "Geist";
+  --font-medium: "Geist-Medium";
+  --font-semibold: "Geist-SemiBold";
+
+  /* Base colors */
+
+  --black: oklch(0 0 0);
+  --white: oklch(1 0 0);
+  --snow: oklch(0.9851 0 0);
+  --eclipse: oklch(0.173 0 0);
+}
+
+@layer theme {
+  @variant light {
+    /* Override dark theme colors */
+
+    /* Background & Surface */
+    --background: oklch(0.173 0 0);
+    --foreground: oklch(0.9851 0 0);
+    --surface: oklch(0.2686 0 0);
+    --surface-foreground: oklch(0.9911 0 0);
+    --overlay: oklch(0.2103 0.0059 285.89);
+    --overlay-foreground: oklch(0.9911 0 0);
+
+    /* Primary colors */
+    --accent: oklch(0.6094 0.1585 263.63);
+    --success: oklch(0.75 0.12 155);
+    --accent-soft: oklch(0.9911 0 0);
+    --accent-soft-foreground: oklch(0.9911 0 0);
+
+    /* Status colors */
+
+    /* Form field colors */
+
+    /* Other colors */
+    --default: oklch(0.3588 0.012 285.78);
+    --muted: oklch(0.709 0 0);
+  }
+
+  @variant dark {
+    /* Override dark theme colors */
+
+    /* Background & Surface */
+    --background: oklch(0.173 0 0);
+    --foreground: oklch(0.9851 0 0);
+    --surface: oklch(0.2686 0 0);
+    --surface-foreground: oklch(0.9911 0 0);
+    --overlay: oklch(0.2103 0.0059 285.89);
+    --overlay-foreground: oklch(0.9911 0 0);
+
+    /* Primary colors */
+    --accent: oklch(0.6094 0.1585 263.63);
+    --success: oklch(0.75 0.12 155);
+    --accent-soft: oklch(0.9911 0 0);
+    --accent-soft-foreground: oklch(0.9911 0 0);
+
+    /* Status colors */
+
+    /* Form field colors */
+
+    /* Other colors */
+    --muted: oklch(0.709 0 0);
+  }
+}

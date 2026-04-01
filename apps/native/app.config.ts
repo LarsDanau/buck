@@ -49,7 +49,10 @@ function parseBuildNumber(buildNumber: unknown): number {
  * @param buildNumber Two-digit local build number.
  * @returns Android versionCode.
  */
-function convertVersionToVersionCode(version: string, buildNumber: number): number {
+function convertVersionToVersionCode(
+  version: string,
+  buildNumber: number,
+): number {
   const parts = version.split(".");
   if (parts.length !== 3) {
     throw new Error('Version must be in semantic format "major.minor.patch".');
@@ -72,9 +75,12 @@ function convertVersionToVersionCode(version: string, buildNumber: number): numb
     throw new Error("Minor and patch versions must be between 0 and 99.");
   }
 
-  const versionCode = major * 1_000_000 + minor * 10_000 + patch * 100 + buildNumber;
+  const versionCode =
+    major * 1_000_000 + minor * 10_000 + patch * 100 + buildNumber;
   if (versionCode > 2_147_483_647) {
-    throw new Error("Calculated versionCode exceeds Android's maximum allowed value.");
+    throw new Error(
+      "Calculated versionCode exceeds Android's maximum allowed value.",
+    );
   }
 
   return versionCode;
@@ -86,7 +92,8 @@ function convertVersionToVersionCode(version: string, buildNumber: number): numb
  * @returns Build-time env values used by app.config.ts.
  */
 function getBuildEnv() {
-  const isCiBuild = process.env.CI === "true" || process.env.EAS_BUILD === "true";
+  const isCiBuild =
+    process.env.CI === "true" || process.env.EAS_BUILD === "true";
   const appEnv = process.env.APP_ENV ?? (isCiBuild ? undefined : "development");
 
   return {
@@ -164,7 +171,10 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     android: {
       package: identifier,
-      versionCode: convertVersionToVersionCode(packageJson.version, buildNumber),
+      versionCode: convertVersionToVersionCode(
+        packageJson.version,
+        buildNumber,
+      ),
       adaptiveIcon: {
         foregroundImage: `./src/assets/icons/app/${appVariant}/android-adaptive.png`,
         backgroundColor: "#000000",
@@ -177,43 +187,26 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     plugins: [
       "expo-router",
+      "expo-localization",
       [
         "expo-font",
         {
           fonts: [
-            "./src/assets/fonts/Geist-Black.ttf",
-            "./src/assets/fonts/Geist-ExtraBold.ttf",
-            "./src/assets/fonts/Geist-Bold.ttf",
             "./src/assets/fonts/Geist-SemiBold.ttf",
             "./src/assets/fonts/Geist-Medium.ttf",
             "./src/assets/fonts/Geist-Regular.ttf",
-            "./src/assets/fonts/Geist-Light.ttf",
-            "./src/assets/fonts/Geist-ExtraLight.ttf",
-            "./src/assets/fonts/Geist-Thin.ttf",
           ],
           android: {
             fonts: [
               {
                 fontFamily: "Geist",
                 fontDefinitions: [
-                  { path: "./src/assets/fonts/Geist-Black.ttf", weight: 900 },
-                  {
-                    path: "./src/assets/fonts/Geist-ExtraBold.ttf",
-                    weight: 800,
-                  },
-                  { path: "./src/assets/fonts/Geist-Bold.ttf", weight: 700 },
                   {
                     path: "./src/assets/fonts/Geist-SemiBold.ttf",
                     weight: 600,
                   },
                   { path: "./src/assets/fonts/Geist-Medium.ttf", weight: 500 },
                   { path: "./src/assets/fonts/Geist-Regular.ttf", weight: 400 },
-                  { path: "./src/assets/fonts/Geist-Light.ttf", weight: 300 },
-                  {
-                    path: "./src/assets/fonts/Geist-ExtraLight.ttf",
-                    weight: 200,
-                  },
-                  { path: "./src/assets/fonts/Geist-Thin.ttf", weight: 100 },
                 ],
               },
             ],

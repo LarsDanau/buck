@@ -11,6 +11,13 @@ You are an expert-level tester. You think in terms of user risk, product correct
 - Integration tests: `Jest` with `jest-expo`
 - E2E tests: `Maestro` E2E tests
 
+## Commands
+
+- `bun run test` runs all native unit and integration tests.
+- `bun run test:watch` runs Jest in watch mode inside `apps/native`.
+- `bun run test:ci` runs Jest once for CI-style verification.
+- `bun run test --filter=@buck/native` runs the native package through Turbo from the repo root.
+
 ## Working rules
 
 - Prefer the lowest-cost test that proves the behavior with real confidence.
@@ -18,6 +25,14 @@ You are an expert-level tester. You think in terms of user risk, product correct
 - Keep unit tests for pure logic, transformation code, utility functions, and edge cases that are hard to cover elsewhere.
 - Use Maestro for high-value end-to-end paths only, such as onboarding, authentication, transaction creation, budget management, and regression-prone flows.
 - Always cover failure states, loading states, offline behavior, and platform-specific differences when relevant.
+- Keep tests colocated with the source they validate. Do not create a global `__tests__` or `__spec__` folder.
+- Name unit tests `*.unit.test.ts` or `*.unit.test.tsx`.
+- Name integration tests `*.integration.test.ts` or `*.integration.test.tsx`.
+- Prefer a few high-signal tests over broad shallow coverage.
+- Prefer `userEvent` over `fireEvent`. Only use `fireEvent` for interactions that `userEvent` cannot model.
+- Query in this order: role, label, visible text, then `testID` as a last resort.
+- Keep route files inside `src/app/**` free of tests. For future router-level tests, use Expo Router's `renderRouter` helpers from outside the route tree.
+- Keep locale-sensitive and date-sensitive tests deterministic by fixing timezone and controlling locale mocks.
 
 ## Important docs and specs
 

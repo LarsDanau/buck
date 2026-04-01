@@ -6,6 +6,13 @@
   "exports": {
     "./native": "./src/native.ts"
   },
+  "scripts": {
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "format": "oxfmt --check .",
+    "format:fix": "oxfmt --write .",
+    "check-types": "tsc --noEmit"
+  },
   "dependencies": {
     "@t3-oss/env-core": "^0.13.11",
     "zod": "catalog:"

@@ -1,26 +1,33 @@
 import { Ionicons } from "@expo/vector-icons";
 import { ImpactFeedbackStyle, impactAsync } from "expo-haptics";
 import { useCallback } from "react";
-import { Platform, Pressable } from "react-native";
+import { Platform } from "react-native";
 import Animated, { FadeOut, ZoomIn } from "react-native-reanimated";
 import { withUniwind } from "uniwind";
 
 import { useAppTheme } from "@/src/contexts/app-theme-context";
+import { Button } from "heroui-native";
 
 const StyledIonicons = withUniwind(Ionicons);
 
+/**
+ * Toggles between light and dark theme with a small icon animation.
+ *
+ * @returns Pressable theme switch for app chrome.
+ */
 export function ThemeToggle() {
   const { toggleTheme, isLight } = useAppTheme();
   const handlePress = useCallback(() => {
+    // Keep haptics limited to iOS so feedback matches platform conventions.
     if (Platform.OS === "ios") {
-      void impactAsync(ImpactFeedbackStyle.Light);
+      impactAsync(ImpactFeedbackStyle.Light);
     }
 
     toggleTheme();
   }, [toggleTheme]);
 
   return (
-    <Pressable onPress={handlePress} className="px-2.5">
+    <Button onPress={handlePress} className="px-2.5">
       {isLight ? (
         <Animated.View key="moon" entering={ZoomIn} exiting={FadeOut}>
           <StyledIonicons name="moon" size={20} className="text-foreground" />
@@ -30,6 +37,6 @@ export function ThemeToggle() {
           <StyledIonicons name="sunny" size={20} className="text-foreground" />
         </Animated.View>
       )}
-    </Pressable>
+    </Button>
   );
 }
