@@ -24,9 +24,7 @@ function SettingsFooter({ appVersion }: { appVersion?: string }) {
           Made by{" "}
         </Text>
         <LinkButton>
-          <LinkButton.Label className="text-accent text-xs">
-            Lars 🇧🇪 ❤
-          </LinkButton.Label>
+          <LinkButton.Label className="text-accent text-xs">Lars 🇧🇪 ❤</LinkButton.Label>
         </LinkButton>
       </View>
     </VStack>

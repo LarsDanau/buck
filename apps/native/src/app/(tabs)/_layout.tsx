@@ -7,8 +7,8 @@ export default function TabLayout() {
   const { t } = useTranslation();
 
   return (
-    <Tabs className="bg-background">
-      <TabSlot />
+    <Tabs className="flex-1 bg-background">
+      <TabSlot className="flex-1" />
       <TabList className="px-10 pt-4 pb-safe-offset-4">
         {/* Transactions tab */}
         <TabTrigger asChild href="/" name="transactions">

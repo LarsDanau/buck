@@ -1,4 +1,14 @@
 const enCommon = {
+  dates: {
+    nextPeriod: "Next period",
+    periods: {
+      day: "Day",
+      week: "Week",
+      month: "Month",
+      year: "Year",
+    },
+    previousPeriod: "Previous period",
+  },
   welcome: "Welcome",
   tabs: {
     analytics: {

@@ -1,0 +1,21 @@
+appId: com.tekhnyx.buck
+---
+- launchApp
+- assertVisible:
+    id: transactions-tab-screen
+- tapOn:
+    id: analytics-tab-button
+- assertVisible:
+    id: analytics-tab-screen
+- tapOn:
+    id: budgets-tab-button
+- assertVisible:
+    id: budgets-tab-screen
+- tapOn:
+    id: settings-tab-button
+- assertVisible:
+    id: settings-tab-screen
+- tapOn:
+    id: transactions-tab-button
+- assertVisible:
+    id: transactions-tab-screen

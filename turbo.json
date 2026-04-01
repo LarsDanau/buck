@@ -10,9 +10,20 @@
     "lint": {
       "dependsOn": ["^lint"]
     },
+    "lint:fix": {
+      "cache": false
+    },
+    "format": {},
+    "format:fix": {
+      "cache": false
+    },
     "check-types": {
       "dependsOn": ["^check-types"]
     },
+    "test": {
+      "dependsOn": ["^test"]
+    },
+    "test:ci": {},
     "dev": {
       "cache": false,
       "persistent": true
