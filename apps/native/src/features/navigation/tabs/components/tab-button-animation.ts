@@ -29,10 +29,7 @@ export const tabPressTransition: Transition = {
   },
 };
 
-export function getScaleAnimation(
-  isPressed: boolean,
-  pressedScale: number,
-): AnimateProps {
+export function getScaleAnimation(isPressed: boolean, pressedScale: number): AnimateProps {
   return {
     scale: isPressed ? pressedScale : DEFAULT_SCALE,
   };

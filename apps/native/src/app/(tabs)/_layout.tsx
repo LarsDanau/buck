@@ -13,9 +13,7 @@ export default function TabLayout() {
         {/* Transactions tab */}
         <TabTrigger asChild href="/" name="transactions">
           <TabBarButton
-            accessibilityLabel={t(
-              ($) => $.tabs.transactions.accessibilityLabel,
-            )}
+            accessibilityLabel={t(($) => $.tabs.transactions.accessibilityLabel)}
             icon="receipt.fill"
             testID="transactions-tab-button"
           />

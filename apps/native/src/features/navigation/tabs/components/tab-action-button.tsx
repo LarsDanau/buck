@@ -80,11 +80,7 @@ export function TabBarAction({
       {...props}
     >
       <PressableFeedback.Highlight animation={highlightAnimation} />
-      <IconSymbol
-        className="text-accent-foreground"
-        name="plus"
-        size={TAB_BAR_ACTION_ICON_SIZE}
-      />
+      <IconSymbol className="text-accent-foreground" name="plus" size={TAB_BAR_ACTION_ICON_SIZE} />
     </PressableFeedback>
   );
 }

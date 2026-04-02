@@ -3,11 +3,7 @@ import type { Transition } from "react-native-ease";
 import { Pressable } from "react-native";
 import type { TabTriggerSlotProps } from "expo-router/ui";
 import { IconSymbol, iconSizes } from "@/src/components/primitives/symbol";
-import {
-  getScaleAnimation,
-  tabPressTransition,
-  tabPressableHitSlop,
-} from "./tab-button-animation";
+import { getScaleAnimation, tabPressTransition, tabPressableHitSlop } from "./tab-button-animation";
 
 // Constants
 const TAB_ICON_SIZE = iconSizes.xl;
@@ -59,10 +55,7 @@ export function TabBarButton({
       {...props}
     >
       {({ pressed }) => (
-        <EaseView
-          animate={getIconAnimation(focused, !!pressed)}
-          transition={tabIconTransition}
-        >
+        <EaseView animate={getIconAnimation(focused, !!pressed)} transition={tabIconTransition}>
           <IconSymbol
             className={focused ? "text-accent-foreground" : "text-muted"}
             name={icon}
