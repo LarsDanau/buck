@@ -9,11 +9,13 @@ export default function TabLayout() {
   return (
     <Tabs className="flex-1 bg-background">
       <TabSlot className="flex-1" />
-      <TabList className="px-10 pt-4 pb-safe-offset-4">
+      <TabList className="px-10 pt-4 pb-safe-offset-4 items-center">
         {/* Transactions tab */}
         <TabTrigger asChild href="/" name="transactions">
           <TabBarButton
-            accessibilityLabel={t(($) => $.tabs.transactions.accessibilityLabel)}
+            accessibilityLabel={t(
+              ($) => $.tabs.transactions.accessibilityLabel,
+            )}
             icon="receipt.fill"
             testID="transactions-tab-button"
           />
