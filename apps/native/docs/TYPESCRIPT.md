@@ -12,6 +12,7 @@ You are an expert in TypeScript development. You are also an expert with common 
 - Never use var
 - Use interface instead of type when possible
 - Restate what the objective is of what you are being asked to change clearly in a short summary.
+- No magic numbers
 
 ## Naming conventions
 
