@@ -7,6 +7,7 @@ This project was created with [Better-T-Stack](https://github.com/AmanVarshney01
 - **TypeScript** - For type safety and improved developer experience
 - **React Native** - Build mobile apps using React
 - **Expo** - Tools for React Native development
+- **Encrypted local database** - SQLCipher-backed SQLite database with the key stored in SecureStore
 - **TailwindCSS** - Utility-first CSS for rapid UI development
 - **Oxlint** - Oxlint + Oxfmt (linting & formatting)
 - **Turborepo** - Optimized monorepo build system
@@ -25,7 +26,18 @@ Then, run the development server:
 bun run dev
 ```
 
-Use the Expo Go app to run the mobile application.
+For the native app database setup, use a rebuilt native binary such as `bun --cwd apps/native run ios` or `bun --cwd apps/native run android`.
+Expo Go is not sufficient for verifying the encrypted database, because SQLCipher is enabled through the native `expo-sqlite` config plugin.
+
+## Local Database
+
+The Buck native app uses one shared local SQLite client defined in [apps/native/src/db/client.ts](/Users/larsdanau/Documents/github/buck/apps/native/src/db/client.ts).
+
+- The native binary enables SQLCipher with `useSQLCipher: true` in [apps/native/app.config.ts](/Users/larsdanau/Documents/github/buck/apps/native/app.config.ts).
+- The runtime opens `buck.db`, applies `PRAGMA key`, enables foreign keys, and verifies the schema before exposing the typed Drizzle client.
+- The database key is generated once and stored in SecureStore.
+- App code can import the singleton directly with `import { db } from "@/db/client"`.
+- [apps/native/src/db/provider.tsx](/Users/larsdanau/Documents/github/buck/apps/native/src/db/provider.tsx) is still required at the app root so migrations and one-time bootstrap data finish before feature UI renders.
 
 ## Git Hooks and Formatting
 

@@ -6,7 +6,8 @@ import { HeroUINativeProvider } from "heroui-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 
-import { AppThemeProvider } from "@/src/contexts/app-theme-context";
+import { AppThemeProvider } from "@/contexts/app-theme-context";
+import { DatabaseProvider } from "@/db/provider";
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -31,7 +32,9 @@ export default function Layout() {
       <KeyboardProvider>
         <AppThemeProvider>
           <HeroUINativeProvider>
-            <StackLayout />
+            <DatabaseProvider>
+              <StackLayout />
+            </DatabaseProvider>
           </HeroUINativeProvider>
         </AppThemeProvider>
       </KeyboardProvider>

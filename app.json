@@ -1,0 +1,9 @@
+{
+  "android": {
+    "package": "com.codifly2.buck"
+  },
+  "ios": {
+    "bundleIdentifier": "com.codifly2.buck",
+    "appleTeamId": "59X5GK76WW"
+  }
+}

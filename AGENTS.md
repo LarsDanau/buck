@@ -14,8 +14,17 @@ See each package's AGENTS.md for specific guidelines.
 - `packages/*` - Shared conifg
 - `packages/config` - Configuration files such as tsconfig, formatters, linters, ...
 - `packages/env` - Shared typed env validation.
+- `packages/db` - Shared SQLite schema, migrations, and DB-facing contracts
 
 Prefer shared logic in packages, app-specific UI/Flow in app.
+
+## Native database
+
+- Buck uses one shared local SQLite client in `apps/native/src/db/client.ts`.
+- The native app is intended to run with SQLCipher enabled through `apps/native/app.config.ts`.
+- The encryption key is stored in SecureStore and applied with `PRAGMA key` before the schema is read.
+- Runtime setup such as opening the database, applying the key, and exporting the singleton client belongs in `apps/native`.
+- Shared schema, migrations, seed data, and DB contracts belong in `packages/db`.
 
 ## Package manager and task runner
 
