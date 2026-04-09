@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import { SymbolView } from "expo-symbols";
 import type {
   SFSymbol,
@@ -21,7 +22,11 @@ export const iconSizes = {
 export type IconSizeName = keyof typeof iconSizes;
 export type IconSize = (typeof iconSizes)[IconSizeName];
 
-const SymbolPrimitive = withUniwind(SymbolView, {
+export interface SymbolProps extends SymbolViewProps {
+  readonly className?: string;
+}
+
+const SymbolPrimitive: ComponentType<SymbolProps> = withUniwind(SymbolView, {
   style: {
     fromClassName: "className",
   },
@@ -31,11 +36,9 @@ const SymbolPrimitive = withUniwind(SymbolView, {
   },
 });
 
-export type SymbolProps = React.ComponentProps<typeof SymbolPrimitive>;
-
 export type { SFSymbol, SymbolScale, SymbolType, SymbolViewProps, SymbolWeight };
 
 /**
  * Uniwind-enabled SF Symbol primitive for app icons.
  */
-export const IconSymbol = SymbolPrimitive;
+export const IconSymbol: ComponentType<SymbolProps> = SymbolPrimitive;

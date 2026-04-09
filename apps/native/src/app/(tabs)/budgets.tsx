@@ -1,3 +1,3 @@
-import { BudgetsTabScreen } from "@/src/features/budgets/budgets-tab-screen";
+import { BudgetsTabScreen } from "@/features/budgets";
 
 export default BudgetsTabScreen;

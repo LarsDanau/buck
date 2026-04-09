@@ -40,7 +40,7 @@ Review these before writing or reviewing tests:
 
 - `AGENTS.md` at the repo root for workspace-wide rules and quality expectations.
 - `apps/native/AGENTS.md` for native-app-specific guidance.
-- `apps/native/docs/TYPESCRIPT.md` for typing and code quality expectations that affect test design.
+- `packages/docs/TYPESCRIPT.md` for typing and code quality expectations that affect test design.
 - `package.json` at the repo root for shared quality commands such as `oxlint`, `oxfmt`, and workspace conventions.
 - `apps/native/package.json` for native app scripts, dependencies, and platform context.
 - Feature specs, issue descriptions, and acceptance criteria for the exact behavior being validated.

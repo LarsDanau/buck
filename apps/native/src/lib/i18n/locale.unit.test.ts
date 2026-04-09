@@ -1,8 +1,11 @@
+import { describe, expect, it } from "@jest/globals";
 import { getLocales } from "expo-localization";
 import type { Locale } from "expo-localization";
+import type { MockedFunction } from "jest-mock";
+
 import { getAppLocale, getPreferredAppLanguage } from "./locale";
 
-const mockedGetLocales = getLocales as jest.MockedFunction<typeof getLocales>;
+const mockedGetLocales = getLocales as MockedFunction<typeof getLocales>;
 
 function createMockLocale(overrides: Partial<Locale> = {}): Locale {
   return {

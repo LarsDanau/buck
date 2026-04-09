@@ -2,10 +2,7 @@ import type { InferInsertModel } from "drizzle-orm";
 
 import type { categories } from "../schema/categories";
 
-type DefaultCategory = Omit<
-  InferInsertModel<typeof categories>,
-  "id" | "createdAt" | "updatedAt"
->;
+type DefaultCategory = Omit<InferInsertModel<typeof categories>, "id" | "createdAt" | "updatedAt">;
 
 /**
  * Built-in categories inserted once for a new local database.

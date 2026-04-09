@@ -1,7 +1,8 @@
 import type { SQLiteDatabase } from "expo-sqlite";
+import { schema } from "@buck/db/database";
 import { openDatabaseSync } from "expo-sqlite";
 import { drizzle } from "drizzle-orm/expo-sqlite";
-import { categories, metadata, transactions } from "@buck/db";
+
 import { getOrCreateDatabaseKey } from "@/db/key";
 
 const DATABASE_NAME = "buck.db";
@@ -32,9 +33,7 @@ function configureDatabase(sqlite: SQLiteDatabase, keyHex: string): void {
  * @returns Open SQLite database handle.
  */
 function openBuckDatabase(): SQLiteDatabase {
-  return openDatabaseSync(DATABASE_NAME, {
-    enableChangeListener: true,
-  });
+  return openDatabaseSync(DATABASE_NAME);
 }
 
 /**
@@ -55,20 +54,7 @@ function createDatabase(): SQLiteDatabase {
 
 function createDrizzleClient(sqlite: SQLiteDatabase) {
   // Register the schema once so every import of `db` gets typed queries.
-  return drizzle(sqlite, {
-    schema: {
-      categories,
-      metadata,
-      transactions,
-    },
-  });
-}
-
-export type BuckDb = ReturnType<typeof createDrizzleClient>;
-
-export interface BuckDatabaseClient {
-  readonly sqlite: SQLiteDatabase;
-  readonly db: BuckDb;
+  return drizzle(sqlite, { schema });
 }
 
 /**
@@ -80,11 +66,3 @@ export const buckDb = createDatabase();
  * Single typed Drizzle client shared by the whole native app runtime.
  */
 export const db = createDrizzleClient(buckDb);
-
-/**
- * Combined runtime database client exported for places that need both layers.
- */
-export const databaseClient: BuckDatabaseClient = {
-  sqlite: buckDb,
-  db,
-};

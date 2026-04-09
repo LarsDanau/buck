@@ -1,11 +1,12 @@
 import { ScrollView, Text, View, VStack } from "@/components/primitives";
 import Constants from "expo-constants";
+import { LinkButton } from "heroui-native";
 import { useTranslation } from "react-i18next";
 
-import { SettingsSectionList } from "@/src/features/settings/components/settings-section-list";
-import { LinkButton } from "heroui-native";
-import { PageTitle } from "@/src/components/composites/page-title";
-import { PageSubtitle } from "@/src/components/composites/page-subtitle";
+import { PageSubtitle } from "@/components/composites/page-subtitle";
+import { PageTitle } from "@/components/composites/page-title";
+
+import { SettingsSectionList } from "../components/settings-section-list";
 
 /**
  * Footer with app version and author attribution.
@@ -37,12 +38,12 @@ function SettingsFooter({ appVersion }: { appVersion?: string }) {
  * @returns Scrollable settings tab screen content.
  */
 export function SettingsTabScreen() {
-  const { t } = useTranslation(["settings"]);
+  const { t } = useTranslation("settings");
   const appVersion = Constants.expoConfig?.version;
 
   return (
     <ScrollView
-      className="flex-1 px-8"
+      className="flex-1 bg-background px-8"
       contentContainerClassName="py-safe-offset-2"
       testID="settings-tab-screen"
     >

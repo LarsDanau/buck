@@ -1,9 +1,14 @@
 import { HStack, IconSymbol, Text, View, VStack } from "@/components/primitives";
+import { router } from "expo-router";
 import { ListGroup, PressableFeedback, Switch, useThemeColor } from "heroui-native";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { ComponentProps, ReactNode } from "react";
 
 type SettingsIconName = ComponentProps<typeof IconSymbol>["name"];
+
+function openCategoriesSettings() {
+  router.push("/settings/categories");
+}
 
 /**
  * Renders the colored square icon used in each settings row.
@@ -48,27 +53,44 @@ function SettingsChevron() {
 function SettingsRow({
   backgroundColor,
   icon,
+  onPress,
   title,
   children,
 }: {
   backgroundColor: string;
   icon: SettingsIconName;
+  onPress?: () => void;
   title: string;
   children?: ReactNode;
 }) {
+  if (!onPress) {
+    return (
+      <ListGroup.Item className="px-4 py-2" disabled>
+        <ListGroup.ItemPrefix>
+          <SettingsItemIcon backgroundColor={backgroundColor} icon={icon} />
+        </ListGroup.ItemPrefix>
+        <ListGroup.ItemContent>
+          <ListGroup.ItemTitle>{title}</ListGroup.ItemTitle>
+        </ListGroup.ItemContent>
+        <ListGroup.ItemSuffix>{children}</ListGroup.ItemSuffix>
+      </ListGroup.Item>
+    );
+  }
+
   return (
-    <PressableFeedback animation={false}>
-      <PressableFeedback.Scale>
-        <ListGroup.Item className="px-4 py-2" disabled>
-          <ListGroup.ItemPrefix>
-            <SettingsItemIcon backgroundColor={backgroundColor} icon={icon} />
-          </ListGroup.ItemPrefix>
-          <ListGroup.ItemContent>
-            <ListGroup.ItemTitle>{title}</ListGroup.ItemTitle>
-          </ListGroup.ItemContent>
-          <ListGroup.ItemSuffix>{children}</ListGroup.ItemSuffix>
-        </ListGroup.Item>
-      </PressableFeedback.Scale>
+    <PressableFeedback
+      accessibilityRole="button"
+      animation={false}
+      className="flex-row items-center gap-3 px-4 py-2"
+      onPress={onPress}
+    >
+      <ListGroup.ItemPrefix>
+        <SettingsItemIcon backgroundColor={backgroundColor} icon={icon} />
+      </ListGroup.ItemPrefix>
+      <ListGroup.ItemContent>
+        <ListGroup.ItemTitle>{title}</ListGroup.ItemTitle>
+      </ListGroup.ItemContent>
+      <ListGroup.ItemSuffix>{children}</ListGroup.ItemSuffix>
       <PressableFeedback.Ripple />
     </PressableFeedback>
   );
@@ -112,14 +134,16 @@ function SettingsValueRow({
 function SettingsLinkRow({
   backgroundColor,
   icon,
+  onPress,
   title,
 }: {
   backgroundColor: string;
   icon: SettingsIconName;
+  onPress?: () => void;
   title: string;
 }) {
   return (
-    <SettingsRow backgroundColor={backgroundColor} icon={icon} title={title}>
+    <SettingsRow backgroundColor={backgroundColor} icon={icon} onPress={onPress} title={title}>
       <SettingsChevron />
     </SettingsRow>
   );
@@ -143,11 +167,14 @@ function SettingsToggleRow({
   defaultSelected?: boolean;
 }) {
   const [isSelected, setIsSelected] = useState(defaultSelected);
+  const handleSelectedChange = useCallback((nextSelected: boolean) => {
+    setIsSelected(nextSelected);
+  }, []);
 
   return (
     <SettingsRow backgroundColor={backgroundColor} icon={icon} title={title}>
       <HStack gap="2" className="items-center">
-        <Switch isSelected={isSelected} onSelectedChange={setIsSelected} />
+        <Switch isSelected={isSelected} onSelectedChange={handleSelectedChange} />
         <SettingsChevron />
       </HStack>
     </SettingsRow>
@@ -215,6 +242,12 @@ function FeaturesSection() {
 function DataSection() {
   return (
     <SettingsSection title="Data">
+      <SettingsLinkRow
+        backgroundColor="#787CFF"
+        icon="folder.fill"
+        onPress={openCategoriesSettings}
+        title="Manage categories"
+      />
       <SettingsLinkRow
         backgroundColor="#537BFF"
         icon="square.and.arrow.up.fill"

@@ -1,14 +1,16 @@
-import { DateFilter } from "@/src/features/transactions/components/date-filter";
+import { Button, useThemeColor } from "heroui-native";
+import { useTranslation } from "react-i18next";
+
+import { PageTitle } from "@/components/composites/page-title";
+import { HStack, IconSymbol, View, VStack } from "@/components/primitives";
 import { ScrollView } from "@/components/primitives/scroll-view";
-import { PageTitle } from "@/src/components/composites/page-title";
-import { PeriodSegmentedControl } from "@/src/features/transactions/components/period-segmented-control";
+
+import { DateFilter } from "../components/date-filter";
+import { PeriodSegmentedControl } from "../components/period-segmented-control";
 import {
   TransactionsFiltersProvider,
   useTransactionsFilters,
-} from "@/src/features/transactions/contexts/transactions-filters-context";
-import { HStack, IconSymbol, View, VStack } from "@/src/components/primitives";
-import { Button, useThemeColor } from "heroui-native";
-import { useTranslation } from "react-i18next";
+} from "../contexts/transactions-filters-context";
 
 /**
  * Transactions tab content bound to shared transactions filter context.

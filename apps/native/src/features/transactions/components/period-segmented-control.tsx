@@ -22,7 +22,7 @@ export function PeriodSegmentedControl({
   onValueChange,
   options = transactionPeriods,
 }: PeriodSegmentedControlProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation("transactions");
 
   const handleValueChange = useCallback(
     (nextValue: string) => {
@@ -44,7 +44,7 @@ export function PeriodSegmentedControl({
         <Tabs.Indicator />
         {options.map((optionValue) => (
           <Tabs.Trigger key={optionValue} value={optionValue} className="rounded-full px-4 py-1">
-            <Tabs.Label className="text-sm">{t(($) => $.dates.periods[optionValue])}</Tabs.Label>
+            <Tabs.Label className="text-sm">{t(($) => $.filters.periods[optionValue])}</Tabs.Label>
           </Tabs.Trigger>
         ))}
       </Tabs.List>

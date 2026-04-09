@@ -1,3 +1,3 @@
-import { AnalyticsTabScreen } from "@/src/features/analytics/screens/analytics-tab-screen";
+import { AnalyticsTabScreen } from "@/features/analytics";
 
 export default AnalyticsTabScreen;

@@ -14,11 +14,10 @@
   "type": "module",
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build",
     "test": "turbo run test",
     "test:ci": "turbo run test:ci",
     "check-types": "turbo run check-types",
-    "check": "turbo run format lint && bun run audit",
+    "check": "bun run format && bun run lint && bun run check-types && bun run test:ci && bun run audit",
     "check:fix": "turbo run lint:fix format:fix",
     "lint": "turbo run lint",
     "lint:ci": "turbo run lint -- --format=github",
@@ -26,13 +25,6 @@
     "format": "turbo run format",
     "format:fix": "turbo run format:fix",
     "audit": "bun audit --audit-level=high"
-  },
-  "dependencies": {
-    "@buck/env": "workspace:*",
-    "zod": "catalog:",
-    "expo": "~55.0.11",
-    "react": "19.2.0",
-    "react-native": "0.83.4"
   },
   "devDependencies": {
     "@buck/config": "workspace:*",

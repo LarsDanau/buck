@@ -1,10 +1,9 @@
 import { Tabs, TabSlot, TabList, TabTrigger } from "expo-router/ui";
-import { TabBarButton } from "@/src/features/navigation/tabs/components/tab-bar-button";
+import { TabBarAction, TabBarButton } from "@/features/navigation/tabs";
 import { useTranslation } from "react-i18next";
-import { TabBarAction } from "@/src/features/navigation/tabs/components/tab-action-button";
 
 export default function TabLayout() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
 
   return (
     <Tabs className="flex-1 bg-background">

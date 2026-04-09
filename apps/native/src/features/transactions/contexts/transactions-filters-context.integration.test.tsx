@@ -1,6 +1,7 @@
+import { describe, expect, it } from "@jest/globals";
 import type { PropsWithChildren } from "react";
 import { act } from "@testing-library/react-native";
-import { renderHookWithProviders } from "@/src/test/test-utils";
+import { renderHookWithProviders } from "@/test/test-utils";
 import {
   TransactionsFiltersProvider,
   useTransactionsFilters,

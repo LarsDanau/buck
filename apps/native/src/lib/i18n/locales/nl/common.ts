@@ -1,13 +1,6 @@
 const nlCommon = {
-  dates: {
-    nextPeriod: "Volgende periode",
-    previousPeriod: "Vorige periode",
-    periods: {
-      day: "Dag",
-      week: "Week",
-      month: "Maand",
-      year: "Jaar",
-    },
+  errors: {
+    unknown: "Er ging iets mis.",
   },
   welcome: "Welkom",
   tabs: {

@@ -1,38 +1,90 @@
-# Buck native - Database
+# Native Database Flow
 
-## Overview
+This document describes the current Buck local-data architecture.
 
-Buck uses one shared local SQLite database client for the native app runtime.
+## Layers
 
-- SQLite driver: `expo-sqlite`
-- ORM: `drizzle-orm/expo-sqlite`
-- Encryption key storage: `expo-secure-store`
-- Encryption engine: SQLCipher via the `expo-sqlite` config plugin
+Buck currently uses three layers for local persistence:
 
-## Current flow
+1. `apps/native`
+   Expo runtime, SQLite client setup, startup coordination, and feature UI.
+2. `packages/domain`
+   Domain entities, write-side validation, repository contracts, and shared app
+   errors.
+3. `packages/db`
+   Drizzle schema, migrations, seed data, row mapping, query helpers, and
+   repository implementations.
 
-1. `src/db/key.ts` reads or creates the one SQLCipher key and stores it in SecureStore.
-2. `src/db/client.ts` opens `buck.db` once for the app runtime.
-3. `src/db/client.ts` applies `PRAGMA key` before the first schema read.
-4. `src/db/client.ts` exports the singleton `buckDb` and typed Drizzle client `db`.
-5. `src/db/provider.tsx` runs `useMigrations(db, migrations)`.
-6. `src/db/provider.tsx` waits for one-time bootstrap work from `src/db/bootstrap.ts`.
-7. Feature code imports `db` directly from `@/db/client`.
+## Ownership
 
-## Usage
+### `apps/native`
 
-Import the singleton Drizzle client directly:
+Owns:
 
-```ts
-import { db } from "@/db/client";
-```
+- opening the SQLite database
+- applying the SQLCipher key
+- enabling connection-level PRAGMAs
+- coordinating migrations and bootstrap work before UI renders
+- feature hooks, screens, and app-specific state
 
-Use `databaseClient` only when code needs both layers:
+Does not own:
 
-```ts
-import { databaseClient } from "@/db/client";
+- Drizzle schema definitions
+- domain validation rules
+- repository implementations
 
-const { sqlite, db } = databaseClient;
-```
+### `packages/domain`
 
-Keep `DatabaseProvider` mounted at the app root so schema migrations and bootstrap data complete before feature UI renders.
+Owns:
+
+- domain entities and domain-level type aliases
+- write-side validation
+- repository contracts
+- stable app/domain error types
+
+Does not own:
+
+- React Query
+- Expo runtime details
+- Drizzle or SQLite driver details
+
+### `packages/db`
+
+Owns:
+
+- Drizzle schema
+- migrations
+- shared seed data
+- repository implementations
+- query helpers
+- row-to-domain mapping
+
+Does not own:
+
+- Expo-specific runtime setup
+- screen logic
+- app presentation concerns
+
+## Runtime Startup Flow
+
+1. `apps/native/src/db/client.ts` opens the one native SQLite connection.
+2. The SQLCipher key is loaded from SecureStore and applied before the first
+   schema read.
+3. `apps/native/src/db/provider.tsx` runs Drizzle migrations.
+4. After migrations succeed, `apps/native/src/db/bootstrap.ts` ensures
+   bootstrap seed data exists exactly once for the active database.
+5. Only after those steps complete does the app tree render.
+
+## Read And Write Guidance
+
+- Reads should prefer shared DB query helpers in `@buck/db`.
+- Writes should prefer domain actions in `@buck/domain`, backed by repository
+  contracts implemented in `@buck/db`.
+- Feature code should not import Drizzle tables or query builders directly.
+- Shared packages should not import Expo runtime modules.
+
+## Current Bootstrap Data
+
+The app currently bootstraps default categories for a new local database. The
+seed data lives in `packages/db`, while the decision to run bootstrap work at
+startup remains in `apps/native`.

@@ -2,11 +2,7 @@ import { relations } from "drizzle-orm";
 import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 import { categories } from "./categories";
-import {
-  sqliteTimestampMs,
-  sqliteUpdatedAt,
-  transactionKindValues,
-} from "./shared";
+import { sqliteTimestampMs, sqliteUpdatedAt, transactionKindValues } from "./shared";
 
 export const transactions = sqliteTable(
   "transactions",

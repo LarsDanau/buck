@@ -2,8 +2,9 @@ import { EaseView } from "react-native-ease";
 import type { Transition } from "react-native-ease";
 import { Pressable } from "react-native";
 import type { TabTriggerSlotProps } from "expo-router/ui";
-import { IconSymbol, iconSizes } from "@/src/components/primitives/symbol";
 import { getScaleAnimation, tabPressTransition, tabPressableHitSlop } from "./tab-button-animation";
+
+import { IconSymbol, iconSizes } from "@/components/primitives/symbol";
 
 // Constants
 const TAB_ICON_SIZE = iconSizes.xl;

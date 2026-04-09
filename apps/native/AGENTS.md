@@ -20,11 +20,12 @@ This app uses `bun` as package manager
 - The database is intended to be encrypted with SQLCipher. This only applies in a rebuilt native binary that includes the `expo-sqlite` config plugin with `useSQLCipher: true`.
 - Expo Go should not be treated as proof that the database is encrypted.
 - The SQLCipher key is stored in SecureStore and applied with `PRAGMA key` before the first schema read.
-- Prefer importing `db` directly for queries, hooks, and mutations.
+- Import `db` directly only in the native DB runtime.
+- In feature code, prefer shared DB query helpers and domain actions over direct Drizzle access.
 
 ## Typscript
 
-For TypeScript conventions, see ./docs/TYPESCRIPT.md
+For TypeScript conventions, see ../../packages/docs/TYPESCRIPT.md
 
 ## Testing
 
@@ -32,5 +33,8 @@ For Testing conventions, see ./docs/TESTING.md
 
 ## Documentation
 
-For documentation conventions, see ./docs/DOCUMENTATIONS.md
-For database flow and encryption details, see ./docs/DATABASE.md
+For comment and JSDoc conventions, see ../../packages/docs/COMMENTS.md
+
+## Architecture / structure
+
+For native database flow and ownership boundaries, see `./docs/DATABASE.md`

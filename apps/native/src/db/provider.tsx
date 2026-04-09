@@ -52,7 +52,7 @@ function useDatabaseBootstrap(migrationsSucceeded: boolean): {
     const runBootstrap = async () => {
       try {
         // Bootstrap data is app-level setup that should run only after schema migrations.
-        await bootstrapDatabase();
+        await bootstrapDatabase(db);
 
         if (!isCancelled) {
           setIsReady(true);

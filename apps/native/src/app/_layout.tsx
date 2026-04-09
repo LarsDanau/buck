@@ -1,5 +1,5 @@
-import "@/global.css";
-import "@/src/lib/i18n/i18n";
+import "../../global.css";
+import "@/lib/i18n/i18n";
 
 import { Stack } from "expo-router";
 import { HeroUINativeProvider } from "heroui-native";
@@ -8,6 +8,7 @@ import { KeyboardProvider } from "react-native-keyboard-controller";
 
 import { AppThemeProvider } from "@/contexts/app-theme-context";
 import { DatabaseProvider } from "@/db/provider";
+import { AppQueryProvider } from "@/query/provider";
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -33,7 +34,9 @@ export default function Layout() {
         <AppThemeProvider>
           <HeroUINativeProvider>
             <DatabaseProvider>
-              <StackLayout />
+              <AppQueryProvider>
+                <StackLayout />
+              </AppQueryProvider>
             </DatabaseProvider>
           </HeroUINativeProvider>
         </AppThemeProvider>

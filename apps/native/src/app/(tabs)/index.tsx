@@ -1,3 +1,3 @@
-import { TransactionsTabScreen } from "@/src/features/transactions/screens/transactions-tab-screen";
+import { TransactionsTabScreen } from "@/features/transactions";
 
 export default TransactionsTabScreen;

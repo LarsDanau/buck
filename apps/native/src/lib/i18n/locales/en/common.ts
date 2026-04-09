@@ -1,13 +1,6 @@
 const enCommon = {
-  dates: {
-    nextPeriod: "Next period",
-    periods: {
-      day: "Day",
-      week: "Week",
-      month: "Month",
-      year: "Year",
-    },
-    previousPeriod: "Previous period",
+  errors: {
+    unknown: "Something went wrong.",
   },
   welcome: "Welcome",
   tabs: {

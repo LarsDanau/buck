@@ -1,6 +1,7 @@
-import { HStack, iconSizes, IconSymbol, Text, View } from "@/src/components/primitives";
 import { Button, useThemeColor } from "heroui-native";
 import { useTranslation } from "react-i18next";
+
+import { HStack, iconSizes, IconSymbol, Text, View } from "@/components/primitives";
 
 /**
  * Controlled props for the transactions date filter.
@@ -18,13 +19,13 @@ export interface DateFilterProps {
  * @returns Rounded transactions date filter control.
  */
 export function DateFilter({ label, onPrevious, onNext }: DateFilterProps) {
-  const { t } = useTranslation();
+  const { t } = useTranslation("transactions");
   const [foreground] = useThemeColor(["foreground"]);
 
   return (
     <HStack className="items-center">
       <Button
-        accessibilityLabel={t(($) => $.dates.previousPeriod)}
+        accessibilityLabel={t(($) => $.filters.previousPeriod)}
         isIconOnly
         onPress={onPrevious}
         variant="ghost"
@@ -39,7 +40,7 @@ export function DateFilter({ label, onPrevious, onNext }: DateFilterProps) {
       </View>
 
       <Button
-        accessibilityLabel={t(($) => $.dates.nextPeriod)}
+        accessibilityLabel={t(($) => $.filters.nextPeriod)}
         isIconOnly
         onPress={onNext}
         variant="ghost"

@@ -1,18 +1,33 @@
 {
-    "name": "@buck/db",
-    "type": "module",
-    "version": "0.0.0",
-    "private": true,
-    "exports": {
-        ".": "./src/index.ts",
-        "./drizzle/migrations": "./drizzle/migrations.js"
-    },
-    "devDependencies": {
-        "@buck/config": "workspace:*",
-        "drizzle-kit": "^0.31.10",
-        "typescript": "catalog:"
-    },
-    "dependencies": {
-        "drizzle-orm": "^0.45.2"
-    }
+  "name": "@buck/db",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./database": "./src/database.ts",
+    "./mappers": "./src/mappers/index.ts",
+    "./queries": "./src/queries/index.ts",
+    "./repositories": "./src/repositories/index.ts",
+    "./schema": "./src/schema/index.ts",
+    "./seed": "./src/seed/index.ts",
+    "./drizzle/migrations": "./drizzle/migrations.js"
+  },
+  "scripts": {
+    "lint": "oxlint .",
+    "lint:fix": "oxlint --fix .",
+    "format": "oxfmt --check .",
+    "format:fix": "oxfmt --write .",
+    "check-types": "tsc --noEmit",
+    "test": "bun test",
+    "test:ci": "bun test"
+  },
+  "dependencies": {
+    "@buck/domain": "workspace:*",
+    "drizzle-orm": "^0.45.2"
+  },
+  "devDependencies": {
+    "@buck/config": "workspace:*",
+    "drizzle-kit": "^0.31.10",
+    "typescript": "catalog:"
+  }
 }

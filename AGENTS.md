@@ -13,7 +13,6 @@ See each package's AGENTS.md for specific guidelines.
 - `apps/native` - Expo react-native app
 - `packages/*` - Shared conifg
 - `packages/config` - Configuration files such as tsconfig, formatters, linters, ...
-- `packages/env` - Shared typed env validation.
 - `packages/db` - Shared SQLite schema, migrations, and DB-facing contracts
 
 Prefer shared logic in packages, app-specific UI/Flow in app.

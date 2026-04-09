@@ -1,25 +1,23 @@
 {
-  "name": "@buck/env",
+  "name": "@buck/domain",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "exports": {
-    "./native": "./src/native.ts"
+    "./categories": "./src/categories/index.ts",
+    "./errors": "./src/shared/errors.ts"
   },
   "scripts": {
     "lint": "oxlint .",
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt --check .",
     "format:fix": "oxfmt --write .",
-    "check-types": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@t3-oss/env-core": "^0.13.11",
-    "zod": "catalog:"
+    "check-types": "tsc --noEmit",
+    "test": "bun test",
+    "test:ci": "bun test"
   },
   "devDependencies": {
     "@buck/config": "workspace:*",
-    "@types/node": "^25.5.0",
     "typescript": "catalog:"
   }
 }

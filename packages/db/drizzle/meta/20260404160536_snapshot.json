@@ -78,10 +78,7 @@
       "indexes": {
         "categories_kind_name_unique": {
           "name": "categories_kind_name_unique",
-          "columns": [
-            "kind",
-            "name"
-          ],
+          "columns": ["kind", "name"],
           "isUnique": true
         }
       },
@@ -202,30 +199,22 @@
       "indexes": {
         "transactions_category_id_idx": {
           "name": "transactions_category_id_idx",
-          "columns": [
-            "category_id"
-          ],
+          "columns": ["category_id"],
           "isUnique": false
         },
         "transactions_kind_idx": {
           "name": "transactions_kind_idx",
-          "columns": [
-            "kind"
-          ],
+          "columns": ["kind"],
           "isUnique": false
         },
         "transactions_occurred_at_idx": {
           "name": "transactions_occurred_at_idx",
-          "columns": [
-            "occurred_at"
-          ],
+          "columns": ["occurred_at"],
           "isUnique": false
         },
         "transactions_effective_date_idx": {
           "name": "transactions_effective_date_idx",
-          "columns": [
-            "effective_date"
-          ],
+          "columns": ["effective_date"],
           "isUnique": false
         }
       },
@@ -234,12 +223,8 @@
           "name": "transactions_category_id_categories_id_fk",
           "tableFrom": "transactions",
           "tableTo": "categories",
-          "columnsFrom": [
-            "category_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["category_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }

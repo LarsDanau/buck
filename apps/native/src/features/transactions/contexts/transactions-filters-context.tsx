@@ -1,8 +1,9 @@
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { getAppLocale } from "@/src/lib/i18n/locale";
 import type { TransactionPeriod } from "../utils/transactions-filters";
+
+import { getAppLocale } from "@/lib/i18n/locale";
 
 import {
   formatTransactionPeriodLabel,

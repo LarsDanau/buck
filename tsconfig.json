@@ -1,3 +1,9 @@
 {
-  "extends": "@buck/config/tsconfig.base.json"
+  "extends": "@buck/config/tsconfig.base.json",
+  "files": [],
+  "references": [
+    { "path": "./packages/domain" },
+    { "path": "./packages/db" },
+    { "path": "./apps/native" }
+  ]
 }

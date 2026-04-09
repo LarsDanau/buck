@@ -36,12 +36,13 @@ The Buck native app uses one shared local SQLite client defined in [apps/native/
 - The native binary enables SQLCipher with `useSQLCipher: true` in [apps/native/app.config.ts](/Users/larsdanau/Documents/github/buck/apps/native/app.config.ts).
 - The runtime opens `buck.db`, applies `PRAGMA key`, enables foreign keys, and verifies the schema before exposing the typed Drizzle client.
 - The database key is generated once and stored in SecureStore.
-- App code can import the singleton directly with `import { db } from "@/db/client"`.
+- App runtime code can import the singleton directly with `import { db } from "@/db/client"`.
+- Feature code should prefer shared DB query helpers and domain actions over direct Drizzle access.
 - [apps/native/src/db/provider.tsx](/Users/larsdanau/Documents/github/buck/apps/native/src/db/provider.tsx) is still required at the app root so migrations and one-time bootstrap data finish before feature UI renders.
 
 ## Git Hooks and Formatting
 
-- Format and lint fix: `bun run check`
+- Full repo quality gate: `bun run check`
 
 ## Project Structure
 
@@ -54,7 +55,6 @@ buck/
 ## Available Scripts
 
 - `bun run dev`: Start all applications in development mode
-- `bun run build`: Build all applications
 - `bun run check-types`: Check TypeScript types across workspace packages
-- `bun run dev:native`: Start the React Native/Expo development server
+- `bun --cwd apps/native run dev`: Start the React Native/Expo development server
 - `bun run check`: Check formatting, linting, and vulnerabilities

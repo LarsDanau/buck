@@ -1,8 +1,9 @@
 import { useCallback, useMemo } from "react";
 import type { GestureResponderEvent } from "react-native";
 import { PressableFeedback, useThemeColor } from "heroui-native";
-import { IconSymbol, iconSizes } from "@/src/components/primitives/symbol";
 import { tabPressableHitSlop } from "./tab-button-animation";
+
+import { IconSymbol, iconSizes } from "@/components/primitives/symbol";
 
 const TAB_BAR_ACTION_ICON_SIZE = iconSizes.xl;
 const ACTION_BUTTON_PRESS_SCALE = 0.95;

@@ -1,12 +1,26 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "boundaries": {
+    "tags": {
+      "app": {
+        "dependencies": {
+          "allow": ["config", "domain", "db"]
+        }
+      },
+      "domain": {
+        "dependencies": {
+          "deny": ["app", "db"]
+        }
+      },
+      "db": {
+        "dependencies": {
+          "allow": ["config", "domain"]
+        }
+      }
+    }
+  },
   "tasks": {
-    "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": ["dist/**"]
-    },
     "lint": {
       "dependsOn": ["^lint"]
     },

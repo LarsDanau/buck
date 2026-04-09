@@ -1,0 +1,7 @@
+{
+  "extends": ["//"],
+  "tags": ["app"],
+  "boundaries": {
+    "implicitDependencies": ["@expo/log-box"]
+  }
+}

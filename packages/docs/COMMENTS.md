@@ -1,4 +1,4 @@
-# Buck native - Documentation guidelines
+# Buck shared - Comments guidelines
 
 Always document functions, hooks & components with JSDoc comments.
 Use regular comments for inline comments.
