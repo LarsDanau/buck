@@ -1,13 +1,8 @@
-# Buck DB package
+# AGENTS.md - packages/db
 
-This package owns the following DB items:
+`packages/db` owns Buck's shared database schema, migrations, repositories, and DB-facing contracts.
 
-- Schema
-- Relations
-- Migrations
-- Repository/query functions
-- DB facing zod schemas
-- Shared data contracts
+## Read Next
 
-This package does not own the native runtime database client.
-The singleton SQLite/Drizzle client, SQLCipher key application, and app startup flow live in `apps/native/src/db`.
+- [DB package guidance](../../docs/agents/db-package.md)
+- [Native database boundaries](../../docs/agents/native-database.md)
